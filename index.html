@@ -61,7 +61,6 @@
         transform: scale(0.95) rotate(-2deg);
       }
 
-      /* BUTON PARLAMA */
       button::after {
         content: "";
         position: absolute;
@@ -80,7 +79,7 @@
         transform: scale(1);
       }
 
-      /* VIDEO MASAÜSTÜ */
+      /* VIDEO */
       #forYou {
         display: none;
         width: 400px;
@@ -183,13 +182,13 @@
       Tarayıcınız video etiketini desteklemiyor.
     </video>
 
-    <!-- MESAJ FORMU -->
+    <!-- MESAJ FORMU (Netlify Uyumlu) -->
     <section id="contact">
       <h2>Bana Mesaj Gönder</h2>
-      <form id="contactForm">
-        <input type="text" id="name" name="name" placeholder="Adınız" required>
-        <input type="email" id="email" name="email" placeholder="E-posta" required>
-        <textarea id="message" name="message" rows="5" placeholder="Mesajınız" required></textarea>
+      <form name="contact" method="POST" data-netlify="true">
+        <input type="text" name="name" placeholder="Adınız" required>
+        <input type="email" name="email" placeholder="E-posta" required>
+        <textarea name="message" rows="5" placeholder="Mesajınız" required></textarea>
         <button type="submit">Gönder</button>
       </form>
       <p id="formMessage"></p>
@@ -220,17 +219,12 @@
         }
       }
 
-      // MESAJ FORMU İŞLEVİ
-      const form = document.getElementById('contactForm');
+      // Kullanıcıya ekranda mesaj gösterme (opsiyonel)
+      const form = document.querySelector('form[name="contact"]');
       const formMessage = document.getElementById('formMessage');
 
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const name = form.name.value;
-        formMessage.textContent = `Teşekkürler, ${name}! Mesajınız alındı.`;
-
-        form.reset();
+      form.addEventListener('submit', function() {
+        formMessage.textContent = "Mesajınız gönderildi! Teşekkürler 😊";
       });
     </script>
   </body>
