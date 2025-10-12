@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Benim İlk Web Sitem</title>
+
+    <style>
+      /* SAYFA GENELİ */
+      body {
+        background-color: black;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 50px;
+      }
+
+      img {
+        width: 400px;
+        border-radius: 15px;
+        margin-top: 20px;
+        animation: parlamak 3s infinite;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      @keyframes parlamak {
+        0% { filter: brightness(100%); }
+        50% { filter: brightness(180%); }
+        100% { filter: brightness(100%); }
+      }
+
+      h1 {
+        color: gold;
+        text-align: center;
+      }
+
+      p {
+        text-align: center;
+      }
+
+      /* BUTONLAR */
+      button {
+        background-color: gold;
+        color: black;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin: 10px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      button:hover {
+        transform: scale(1.1) rotate(2deg);
+      }
+
+      button:active {
+        transform: scale(0.95) rotate(-2deg);
+      }
+
+      /* BUTON PARLAMA */
+      button::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+        transform: scale(0);
+        transition: transform 0.5s;
+        pointer-events: none;
+        border-radius: 50%;
+      }
+
+      button:hover::after {
+        transform: scale(1);
+      }
+
+      /* VIDEO MASAÜSTÜ */
+      #forYou {
+        display: none;
+        width: 400px;
+        border: 3px solid gold;
+        border-radius: 10px;
+        float: left;
+        margin-right: 20px;
+        margin-top: 20px;
+      }
+
+      /* RESPONSIVE */
+      @media screen and (max-width: 768px) {
+        #forYou {
+          float: none;
+          display: block;
+          margin: 20px auto;
+          width: 90%;
+        }
+
+        body {
+          margin: 20px;
+        }
+
+        img {
+          width: 80%;
+        }
+
+        button {
+          width: 80%;
+          padding: 15px;
+          font-size: 18px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <img src="logo.png" alt="Benim Logom">
+
+    <h1>Hoş Geldin!</h1>
+    <p>Bu benim ilk web sitem 😎</p>
+
+    <!-- MÜZİK -->
+    <audio id="muzik" src="muzik.mp3"></audio>
+    <button onclick="muzikCal()">🎵 Müziği Başlat</button>
+    <button onclick="muzikDurdur()">⏹ Müziği Durdur</button>
+
+    <!-- VIDEO -->
+    <button onclick="forYouVideo()">For You</button>
+    <video id="forYou" width="400" controls>
+      <source src="video.mp4" type="video/mp4">
+      Tarayıcınız video etiketini desteklemiyor.
+    </video>
+
+    <script>
+      function muzikCal() {
+        var muzik = document.getElementById("muzik");
+        muzik.play();
+        alert("Müzik başladı 🎶");
+      }
+
+      function muzikDurdur() {
+        var muzik = document.getElementById("muzik");
+        muzik.pause();
+        muzik.currentTime = 0;
+        alert("Müzik durduruldu ⏹");
+      }
+
+      function forYouVideo() {
+        var video = document.getElementById("forYou");
+        video.style.display = "block";
+        video.play();
+
+        video.onended = function() {
+          video.style.display = "none";
+          video.currentTime = 0;
+        }
+      }
+    </script>
+  </body>
+</html>
